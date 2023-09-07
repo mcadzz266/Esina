@@ -34,7 +34,7 @@ const connect = async () => {
   });
   console.log("✅ Plugins Installed!");
 
-  const Xasena = async () => {
+  const EXBOT = async () => {
     const { state, saveCreds } = await useMultiFileAuthState(
       __dirname + "/session"
     );
@@ -73,7 +73,7 @@ const connect = async () => {
           DisconnectReason.loggedOut
         ) {
           await delay(300);
-          Xasena();
+          EXBOT();
           console.log("reconnecting...");
         } else {
           console.log("connection closed\nDevice logged out.");
@@ -104,9 +104,9 @@ const connect = async () => {
               : msg.from
           }\nFrom : ${msg.sender}\nMessage:${text_msg}`
         );
-      plugins.commands.map(async (command) => {
+      plugins.commands.map(async (exbot) => {
         if (
-          command.fromMe &&
+          exbot.fromMe &&
           !config.SUDO.split(",").includes(
             msg.sender.split("@")[0] || !msg.isSelf
           )
@@ -123,41 +123,41 @@ const connect = async () => {
 
         let whats;
         switch (true) {
-          case command.pattern && command.pattern.test(comman):
+          case exbot.pattern && exbot.pattern.test(comman):
             let match;
             try {
               match = text_msg
-                .replace(new RegExp(command.pattern, "i"), "")
+                .replace(new RegExp(exbot.pattern, "i"), "")
                 .trim();
             } catch {
               match = false;
             }
             whats = new Message(conn, msg);
-            command.function(whats, match, msg, conn);
+            exbot.function(whats, match, msg, conn);
             break;
 
-          case text_msg && command.on === "text":
+          case text_msg && exbot.on === "text":
             whats = new Message(conn, msg);
-            command.function(whats, text_msg, msg, conn, m);
+            exbot.function(whats, text_msg, msg, conn, m);
             break;
 
-          case command.on === "image" || command.on === "photo":
+          case exbot.on === "image" || exbot.on === "photo":
             if (msg.type === "imageMessage") {
               whats = new Image(conn, msg);
-              command.function(whats, text_msg, msg, conn, m);
+              exbot.function(whats, text_msg, msg, conn, m);
             }
             break;
 
-          case command.on === "sticker":
+          case exbot.on === "sticker":
             if (msg.type === "stickerMessage") {
               whats = new Sticker(conn, msg);
-              command.function(whats, msg, conn, m);
+              exbot.function(whats, msg, conn, m);
             }
             break;
-          case command.on === "video":
+          case exbot.on === "video":
             if (msg.type === "videoMessage") {
               whats = new Video(conn, msg);
-              command.function(whats, msg, conn, m);
+              exbot.function(whats, msg, conn, m);
             }
             break;
 
@@ -168,7 +168,7 @@ const connect = async () => {
     });
     return conn;
   };
-  Xasena();
+  EXBOT();
 };
 
 connect();

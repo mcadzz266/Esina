@@ -1,6 +1,6 @@
 const config = require("../config");
-const { command, isPrivate } = require("../lib/");
-command(
+const { exbot, isPrivate } = require("../lib/");
+exbot(
   {
     pattern: "sticker",
     fromMe: isPrivate,

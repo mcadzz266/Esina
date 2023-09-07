@@ -1,8 +1,8 @@
 const plugins = require("../lib/plugins");
-const { command, isPrivate, clockString } = require("../lib");
+const { exbot, isPrivate, clockString } = require("../lib");
 const { OWNER_NAME, BOT_NAME } = require("../config");
 const { hostname, uptime } = require("os");
-command(
+exbot(
   {
     pattern: "menu",
     fromMe: isPrivate,
@@ -15,7 +15,7 @@ command(
       for (let i of plugins.commands) {
         if (i.pattern.test(message.prefix + match))
           message.reply(
-            `\`\`\`Command : ${message.prefix}${match.trim()}
+            `\`\`\`exbot : ${message.prefix}${match.trim()}
 Description : ${i.desc}\`\`\``
           );
       }
@@ -37,19 +37,19 @@ Description : ${i.desc}\`\`\``
       let cmnd = [];
       let cmd;
       let category = [];
-      plugins.commands.map((command, num) => {
-        if (command.pattern) {
-          cmd = command.pattern
+      plugins.commands.map((exbot, num) => {
+        if (exbot.pattern) {
+          cmd = exbot.pattern
             .toString()
             .match(/(\W*)([A-Za-züşiğ öç1234567890]*)/)[2];
         }
 
-        if (!command.dontAddCommandList && cmd !== undefined) {
+        if (!exbot.dontAddCommandList && cmd !== undefined) {
           let type;
-          if (!command.type) {
+          if (!exbot.type) {
             type = "misc";
           } else {
-            type = command.type.toLowerCase();
+            type = exbot.type.toLowerCase();
           }
 
           cmnd.push({ cmd, type: type });
@@ -72,13 +72,13 @@ Description : ${i.desc}\`\`\``
       });
 
       menu += ` ╰━━━━━━━━━━━──⊷\n`;
-      menu += `_🔖Send ${prefix}menu <command name> to get detailed information of specific command._\n*📍Eg:* _${prefix}menu plugin_`;
+      menu += `_🔖Send ${prefix}menu <exbot name> to get detailed information of specific exbot._\n*📍Eg:* _${prefix}menu plugin_`;
       return await message.sendMessage(menu);
     }
   }
 );
 
-command(
+exbot(
   {
     pattern: "list",
     fromMe: isPrivate,
@@ -87,22 +87,22 @@ command(
     dontAddCommandList: true,
   },
   async (message, match, { prefix }) => {
-    let menu = `╭───〔 ${tiny("x-asena command list")} 〕────\n`;
+    let menu = `╭───〔 ${tiny("x-asena exbot list")} 〕────\n`;
 
     let cmnd = [];
     let cmd, desc;
-    plugins.commands.map((command) => {
-      if (command.pattern) {
-        cmd = command.pattern
+    plugins.commands.map((exbot) => {
+      if (exbot.pattern) {
+        cmd = exbot.pattern
           .toString()
           .match(/(\W*)([A-Za-züşiğ öç1234567890]*)/)[2];
       }
-      if (command.desc) {
-        desc = command.desc;
+      if (exbot.desc) {
+        desc = exbot.desc;
       } else {
         desc = false;
       }
-      if (!command.dontAddCommandList && cmd !== undefined) {
+      if (!exbot.dontAddCommandList && cmd !== undefined) {
         cmnd.push({ cmd, desc });
       }
     });

@@ -1,5 +1,5 @@
-const { command} = require("../lib/");
-command(
+const { exbot} = require("../lib/");
+exbot(
   {
     pattern: "ping",
     fromMe: false,

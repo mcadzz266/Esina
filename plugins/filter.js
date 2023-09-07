@@ -3,9 +3,9 @@ const {
   setFilter,
   deleteFilter,
 } = require("../assets/database/filters");
-const { command, isPrivate, tiny } = require("../lib");
+const { exbot, isPrivate, tiny } = require("../lib");
 
-command(
+exbot(
   {
     pattern: "filter",
     fromMe: true,
@@ -42,7 +42,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "stop",
     fromMe: true,
@@ -63,7 +63,7 @@ command(
   }
 );
 
-command({ on: "text", fromMe: isPrivate }, async (message, match) => {
+exbot({ on: "text", fromMe: isPrivate }, async (message, match) => {
   var filtreler = await getFilter(message.jid);
   if (!filtreler) return;
   filtreler.map(async (filter) => {

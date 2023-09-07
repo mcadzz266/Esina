@@ -1,8 +1,8 @@
-const { command } = require("../lib");
+const { exbot } = require("../lib");
 const got = require("got");
 const fs = require("fs");
 const { PluginDB, installPlugin } = require("../assets/database").Plugins;
-command(
+exbot(
   {
     pattern: "install",
     fromMe: true,
@@ -50,7 +50,7 @@ command(
 
 
 
-command(
+exbot(
   { pattern: "plugin", fromMe: true, desc: "plugin list", type: "user" },
   async (message, match) => {
     var mesaj = "";
@@ -73,7 +73,7 @@ command(
 
 
 
-command(
+exbot(
   {
     pattern: "remove(?: |$)(.*)",
     fromMe: true,

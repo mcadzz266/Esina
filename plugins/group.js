@@ -1,7 +1,7 @@
-const { command, isPrivate } = require("../lib/");
+const { exbot, isPrivate } = require("../lib/");
 const { isAdmin, parsedJid } = require("../lib");
 
-command(
+exbot(
   {
     pattern: "add ",
     fromMe: isPrivate,
@@ -10,7 +10,7 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     match = match || message.reply_message.jid;
     if (!match) return await message.reply("_Mention user to add");
     let isadmin = await isAdmin(message.jid, message.user, message.client);
@@ -23,7 +23,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "kick ",
     fromMe: isPrivate,
@@ -32,7 +32,7 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     match = match || message.reply_message.jid;
     if (!match) return await message.reply("_Mention user to kick");
     let isadmin = await isAdmin(message.jid, message.user, message.client);
@@ -45,7 +45,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "promote ",
     fromMe: isPrivate,
@@ -54,7 +54,7 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     match = match || message.reply_message.jid;
     if (!match) return await message.reply("_Mention user to promote_");
     let isadmin = await isAdmin(message.jid, message.user, message.client);
@@ -67,7 +67,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "demote ",
     fromMe: isPrivate,
@@ -76,7 +76,7 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     match = match || message.reply_message.jid;
     if (!match) return await message.reply("_Mention user to demote");
     let isadmin = await isAdmin(message.jid, message.user, message.client);
@@ -89,7 +89,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "mute",
     fromMe: true,
@@ -98,7 +98,7 @@ command(
   },
   async (message, match, m, client) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     if (!isAdmin(message.jid, message.user, message.client))
       return await message.reply("_I'm not admin_");
     await message.reply("_Muting_");
@@ -106,7 +106,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "unmute",
     fromMe: true,
@@ -115,7 +115,7 @@ command(
   },
   async (message, match, m, client) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     if (!isAdmin(message.jid, message.user, message.client))
       return await message.reply("_I'm not admin_");
     await message.reply("_Unmuting_");
@@ -123,7 +123,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "gjid",
     fromMe: true,
@@ -132,7 +132,7 @@ command(
   },
   async (message, match, m, client) => {
     if (!message.isGroup)
-      return await message.reply("_This command is for groups_");
+      return await message.reply("_This exbot is for groups_");
     let { participants } = await client.groupMetadata(message.jid);
     let participant = participants.map((u) => u.id);
     let str = "╭──〔 *Group Jids* 〕\n";
@@ -144,7 +144,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "tagall ?(.*)",
     fromMe: true,
@@ -164,7 +164,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "tag ?(.*)",
     fromMe: true,

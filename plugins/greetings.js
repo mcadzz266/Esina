@@ -1,8 +1,8 @@
-const { command } = require("../lib/");
+const { exbot } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } =
   require("../assets/database").Greetings;
 
-command(
+exbot(
   {
     pattern: "welcome",
     fromMe: true,
@@ -53,7 +53,7 @@ command(
   }
 );
 
-command(
+exbot(
   {
     pattern: "goodbye",
     fromMe: true,

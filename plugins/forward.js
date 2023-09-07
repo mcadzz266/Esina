@@ -1,6 +1,6 @@
-const { command, parsedJid } = require("../lib/");
+const { exbot, parsedJid } = require("../lib/");
 
-command(
+exbot(
   {
     pattern: "fd",
     fromMe: true,
